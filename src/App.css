@@ -1,13 +1,390 @@
-.pomodoro-container {
+body, html {
+  overflow: hidden;
+  height: 100%;
+}
+
+.App {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
 
-.buttons-container {
+/* Timer Styles */
+.timer-container {
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  width: 300px;
+  height: 150px;
+  border-radius: 8px;
+  border: 4px solid #000000;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
+
+.timer {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.time-label {
+  font-size: 0.8rem;
+  margin-top: -10px;
+}
+
+/* Controls Styles */
+.controls {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}
+
+.controls button {
+  font-size: 1rem;
+  padding: 8px 15px;
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.controls button:hover {
+  background-color: #14171a;
+}
+
+/* Session Length Styles */
+.session-length {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.session-length label {
+  margin-right: 10px;
+}
+
+.session-length input {
+  color: rgb(0, 0, 0);
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: 1.5px solid #000000;
+  border-radius: 4px;
+  background-color: rgb(255, 255, 255, 0.1);
+}
+
+/* Image Changer Styles */
+.image-changer-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: rgba(32, 27, 27, 0.6);
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.image-changer-button:hover {
+  background-color: #9a9da0;
+}
+
+/* Image Dropdown Styles */
+.image-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 2px solid #000000;
+  border-radius: 4px;
+  padding: 10px;
+  width: 200px;
+  display: none;
+  z-index: 1;
+  opacity: 0.9;
+}
+
+.image-dropdown.show {
+  display: block;
+}
+
+.image-option {
+  cursor: pointer;
+  padding: 5px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.image-option img {
+  width: 55px;
+  height: 55px;
+  margin-right: 10px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.image-option span {
+  flex: 1;
+}
+
+.image-option:hover {
+  background-color: #f0f0f0;
+}
+
+.image-preview {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Progress Bar Styles */
+.progress-bar-container {
+  width: 300px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: rgba(48, 48, 48, 0.4);
+  border-radius: 5px;
+}
+
+/* Shimeji Toggle Styles */
+.shimeji-toggle {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: rgba(49, 47, 47, 0.5);
+  color: #fff;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.shimeji-toggle:hover {
+  background-color: #bfc0c2;
+}
+
+.shimeji-toggle::before {
+  content: '🐾';
+  font-size: 1.5rem;
+}
+
+.shimeji-toggle.enabled::before {
+  content: '🐾';
+}
+
+
+
+
+/* .App {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('https://i.pinimg.com/originals/5e/a8/ca/5ea8cac804bb8455fcb94849ed1a65b1.gif');
+}
+
+.timer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  width: 300px; 
+  height: 150px; 
+  border-radius: 8px;
+  border: 4px solid #000000;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px); 
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); 
+}
+
+.controls button {
+  margin: 5px;
+  font-size: 1rem;
+  padding: 8px 15px;
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.controls button:hover {
+  background-color: #14171a;
+}
+
+.session-length {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.session-length label {
+  margin-right: 10px;
+}
+
+.session-length input {
+  color: rgb(0, 0, 0);
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: 1.5px solid #000000;
+  border-radius: 4px;
+  background-color: rgb(255, 255, 255, 0.1);
+}
+
+.timer {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.image-changer-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: rgb(32, 27, 27, 0.6);
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.image-changer-button:hover {
+  background-color: #9a9da0;
+}
+
+.image-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  background-color: rgb(255, 255, 255, 0.4);
+  border: 2px solid #000000;
+  border-radius: 4px;
+  padding: 10px;
+  width: 200px;
+  display: none;
+  z-index: 1;
+  opacity: 0.9;
+
+.image-dropdown.show {
+  display: block;
+}
+
+.image-option {
+  cursor: pointer;
+  padding: 5px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+
+}
+.image-option img {
+  width: 55px; 
+  height: 55px; 
+  margin-right: 10px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.image-option span {
+  flex: 1;
+}
+
+.image-option:hover {
+  background-color: #f0f0f0;
+}
+
+.image-preview {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.progress-bar-container {
+  width: 300px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: rgba(48, 48, 48, 0.4);
+  border-radius: 5px;
+}
+
+
+.shimeji-toggle {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: rgb(32, 27, 27, 0.6);
+  color: #fff;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.shimeji-toggle:hover {
+  background-color: #bfc0c2;
+}
+
+.shimeji-toggle::before {
+  content: '🐾';
+  font-size: 1.5rem;
+}
+
+.shimeji-toggle.enabled::before {
+  content: '🐾';
+
+}
+
+} */

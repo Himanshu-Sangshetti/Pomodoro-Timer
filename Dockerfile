@@ -12,7 +12,11 @@ RUN npm run build
 
 FROM nginx:alpine
 
-COPY --from=build /app/build /usr/share/nginx/html
+RUN rm -rf /etc/nginx/conf.d
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+COPY --from=build /timer/build /usr/share/nginx/html
 
 EXPOSE 80
 
